@@ -1,6 +1,6 @@
 import './App.css';
 
-import {BrowserRouter, Routes, Route,Navigate} from "react-router-dom";
+import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 
 function App() {
   return (
@@ -9,13 +9,13 @@ function App() {
       <BrowserRouter>
         <div className="container">
           <Routes>
-
+            
           </Routes>
         </div>
       </BrowserRouter>
 
     </div>
   );
-}
+};
 
 export default App;
