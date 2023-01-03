@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter, Routes, Route, Navigate} from "react-router-dom";
 
 // PAGINAS
+import Inicial from './pages/inicial/Inicial';
 import Home from './pages/home/Home';
 import Sobre from './pages/sobre/Sobre';
 
