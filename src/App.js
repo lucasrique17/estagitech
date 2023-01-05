@@ -8,8 +8,8 @@ import { AuthProvider } from './context/AuthContext';
 
 // HOOKS
 import { useState, useEffect } from 'react';
-import { useAuthentication } from './hooks/useAuthentication';
-import { UseAuthentication } from './hooks/estAuthentication';
+import { useAuthenticationUser } from './hooks/useAuthenticationUser';
+import { useAuthenticationEstudante } from './hooks/useAuthenticationEstudante';
 
 // PAGINAS
 import Home from './pages/home/Home';
@@ -18,6 +18,8 @@ import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import RegisterEstudante from './pages/registerEstudante/RegisterEstudante';
 import RegisterUser from './pages/registerUser/RegisterUser';
+import CreatePost from './pages/createPost/CreatePost';
+import Dashboard from './pages/dashboard/Dashboard';
 
 
 // COMPONENTES
@@ -29,7 +31,7 @@ function App() {
 
   // USUARIO EMPRESA/PROFESSOR
   const [user, setUser] = useState(undefined)
-  const {authUser} = useAuthentication()
+  const {authUser} = useAuthenticationUser()
 
   const loadingUser = user === undefined
 
@@ -47,7 +49,7 @@ function App() {
 
   // USUARIO ESTUDANTE
   const [estudante, setEstudante] = useState(undefined)
-  const {authEstudante} = UseAuthentication()
+  const {authEstudante} = useAuthenticationEstudante()
 
   const loadingEstudante = estudante === undefined
 
@@ -66,17 +68,19 @@ function App() {
   return (
     <div className="App">
       
-      <AuthProvider value={user || estudante}>
+      <AuthProvider value={({user} || {estudante})}>
         <BrowserRouter>
           <Navbar />
             <div className="container">
               <Routes>
                 <Route path='/' element={<Home />} />
                 <Route path='/sobre' element={<Sobre />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-                <Route path='/registerEstudante' element={<RegisterEstudante />} />
-                <Route path='/registerUser' element={<RegisterUser />} />
+                <Route path='/login' element={(!user || estudante) ? <Login /> : <Navigate to="/" />} />
+                <Route path='/register' element={(!user || estudante) ? <Register /> : <Navigate to="/" />} />
+                <Route path='/registerEstudante' element={(!user || estudante) ? <RegisterEstudante /> : <Navigate to="/" />} />
+                <Route path='/registerUser' element={(!user || estudante) ? <RegisterUser /> : <Navigate to="/" />} />
+                <Route path='/posts/create' element={user ? <CreatePost /> : <Navigate to="/login" />} />
+                <Route path='/dashboard' element={user ? <Dashboard /> : <Navigate to="/login" />} />
               </Routes>
             </div>
           <Footer />

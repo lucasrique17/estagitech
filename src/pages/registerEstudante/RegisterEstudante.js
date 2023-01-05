@@ -3,8 +3,7 @@ import styles from "./RegisterEstudante.module.css";
 import { useState, useEffect } from "react";
 
 // HOOKS
-import { UseAuthentication } from "../../hooks/estAuthentication";
-import { async } from "@firebase/util";
+import { useAuthenticationEstudante } from "../../hooks/useAuthenticationEstudante";
 
 
 const RegisterEstudante = () => {
@@ -13,66 +12,71 @@ const RegisterEstudante = () => {
   const [emailEstudante, setEmailEstudante] = useState("");
   const [passwordEstudante, setPasswordEstudante] = useState("");
   const [confirmPasswordEstudante, setConfirmPasswordEstudante] = useState("");
-  const [error, setError] = useState("");
+  const [errorEstudante, setErrorEstudante] = useState("");
 
-  const {createEstudante, error: authError, loading} = UseAuthentication(); 
+  const { createEstudante, errorEstudante: authErrorEstudante, loadingEstudante } = useAuthenticationEstudante();
 
-  const handleSubmitEstudante = async(e) => {
+  const handleSubmitEstudante = async (e) => {
     e.preventDefault();
 
-    setError("");
+    setErrorEstudante("");
 
     const estudante = {
       displayNameEstudante,
       emailEstudante,
-      passwordEstudante
-    }
+      passwordEstudante,
+    };
 
-    if(passwordEstudante !== confirmPasswordEstudante) {
-      setError("As senhas devem ser iguais!");
+    if (passwordEstudante !== confirmPasswordEstudante) {
+      setErrorEstudante("As senhas precisam ser iguais.");
       return;
     }
 
-    const res = await createEstudante(estudante);
+    const resEstudante = await createEstudante(estudante);
 
-    console.log(estudante);
-  }
+    console.log(resEstudante);
+  };
 
   useEffect(() => {
-
-    if(authError) {
-      setError(authError)
+    if (authErrorEstudante) {
+      setErrorEstudante(authErrorEstudante);
     }
-
-  }, [authError])
+  }, [authErrorEstudante]);
 
   return (
-    <div className={styles.register_estudante}>
+    <div className={styles.register}>
       <h1>Cadastre-se</h1>
-      <p>Crie seu usuário para ter acesso as melhores vagas de estágio!</p>
+      <p>Crie seu usuário e tenha acesso as melhores vagas de estágio!</p>
+
       <form onSubmit={handleSubmitEstudante}>
         <label>
           <span>Nome:</span>
-          <input type="text" name="displayNameEstudante" required placeholder="Digite seu nome" value={displayNameEstudante} onChange={(e) => setDisplayNameEstudante(e.target.value)} />
+          <input type="text" name="displayNameEstudante" required placeholder="Digite seu nome" onChange={(e) => setDisplayNameEstudante(e.target.value)} value={displayNameEstudante} />
         </label>
+
         <label>
           <span>E-mail:</span>
-          <input type="email" name="emailEstudante" required placeholder="Digite seu e-mail" value={emailEstudante} onChange={(e) => setEmailEstudante(e.target.value)} />
+          <input type="email" name="emailEstudante" required placeholder="Digite seu e-mail" onChange={(e) => setEmailEstudante(e.target.value)} value={emailEstudante} />
         </label>
+
         <label>
           <span>Senha:</span>
-          <input type="password" name="passwordEstudante" required placeholder="Digite sua senha" value={passwordEstudante} onChange={(e) => setPasswordEstudante(e.target.value)} />
+          <input type="password" name="passwordEstudante" required placeholder="Digite sua senha" onChange={(e) => setPasswordEstudante(e.target.value)} value={passwordEstudante} />
         </label>
+
         <label>
-          <span>Confirmar Senha:</span>
-          <input type="password" name="confirmPasswordEstudante" required placeholder="Confirme sua senha" value={confirmPasswordEstudante} onChange={(e) => setConfirmPasswordEstudante(e.target.value)} />
+          <span>Confirmação de senha:</span>
+          <input type="password" name="confirmPasswordEstudante" required placeholder="Confirme sua senha" onChange={(e) => setConfirmPasswordEstudante(e.target.value)} value={confirmPasswordEstudante} />
         </label>
-        {!loading && <button className="btn">Cadastrar</button>}
-        {loading && <button className="btn" disabled>Aguarde...</button>}
-        {error && <p className="error">{error}</p>}
+
+        {!loadingEstudante && <button className="btn">Entrar</button>}
+        {loadingEstudante && (
+          <button className="btn" disabled>Aguarde...</button>
+        )}
+        {errorEstudante && <p className="error">{errorEstudante}</p>}
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default RegisterEstudante

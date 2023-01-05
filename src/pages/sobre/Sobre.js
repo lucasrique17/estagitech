@@ -3,8 +3,9 @@ import styles from "./Sobre.module.css";
 
 const Sobre = () => {
   return (
-    <div>
-        <h1>Sobre</h1>
+    <div className={styles.sobre}>
+        <h2>Sobre o Estagi<span>TECH</span></h2>
+        <p>Escrever Depois</p>
     </div>
   )
 }
