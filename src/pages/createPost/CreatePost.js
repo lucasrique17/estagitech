@@ -5,6 +5,9 @@ import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useAuthValue} from '../../context/AuthContext'
 import { useInsertDocuments } from '../../hooks/useInsertDocument'
+//import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
+//import { storage } from "../../firebase/config"
+
 
 const CreatePost = () => {
 
@@ -25,13 +28,11 @@ const CreatePost = () => {
 
     setFormError('')
 
-    // VALIDAR IMAGEM
+    // IMAGEM
     try {
-
-      new URL(image)
-      
+      new URL(image);
     } catch (error) {
-      return setFormError('A imagem precisa ser uma URL!')
+      setFormError("A imagem precisa ser uma URL.");
     }
 
     // ARRAY DAS TAGS

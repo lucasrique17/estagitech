@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore"; 
-
+import { getStorage } from "firebase/storage";
+ 
 const firebaseConfig = {
   apiKey: "AIzaSyANvGDbtgfmMLD2U4Nd6sD-9v8qe0ibaQM",
   authDomain: "estagitech-8df26.firebaseapp.com",
@@ -16,5 +17,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 //const analytics = getAnalytics(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 
-export {db};
+export {db, storage};
