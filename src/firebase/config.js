@@ -1,21 +1,20 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+//import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore"; 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDmgkgyY-K-L6y2QQAN572STmNHJVWDlYQ",
-  authDomain: "estagitech.firebaseapp.com",
-  projectId: "estagitech",
-  storageBucket: "estagitech.appspot.com",
-  messagingSenderId: "648956985200",
-  appId: "1:648956985200:web:a353c0c97b9db1dc3c99b5",
-  measurementId: "G-2RQQZEEP2Y"
+  apiKey: "AIzaSyANvGDbtgfmMLD2U4Nd6sD-9v8qe0ibaQM",
+  authDomain: "estagitech-8df26.firebaseapp.com",
+  projectId: "estagitech-8df26",
+  storageBucket: "estagitech-8df26.appspot.com",
+  messagingSenderId: "978548429311",
+  appId: "1:978548429311:web:b64199bb23c840d1de97ca",
+  measurementId: "G-GET5NEPDPJ"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-const analytics = getAnalytics(app);
+//const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 export {db};

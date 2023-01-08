@@ -1,90 +1,56 @@
-import styles from "./Login.module.css"
+import styles from "./Login.module.css";
 
-import { useState, useEffect } from "react";
-
-// HOOKS
-import { useAuthenticationUser } from "../../hooks/useAuthenticationUser";
-import { useAuthenticationEstudante } from "../../hooks/useAuthenticationEstudante";
+import { useEffect, useState } from "react";
+import { useAuthentication } from "../../hooks/useAuthentication";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  // LOGIN USUARIO
-  const [emailUser, setEmailUser] = useState("");
-  const [passwordUser, setPasswordUser] = useState("");
-  const [errorUser, setErrorUser] = useState("");
+  const { login, error: authError, loading } = useAuthentication();
 
-  const { loginUser, errorUser: authErrorUser, loadingUser } = useAuthenticationUser();
-
-  const handleSubmitUser = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setErrorUser("");
+    setError("");
 
     const user = {
-      emailUser,
-      passwordUser,
+      email,
+      password,
     };
 
-    const resUser = await loginUser(user);
+    const res = await login(user);
 
-    console.log(resUser);
+    console.log(res);
   };
 
   useEffect(() => {
-    console.log(authErrorUser);
-    if (authErrorUser) {
-      setErrorUser(authErrorUser);
+    console.log(authError);
+    if (authError) {
+      setError(authError);
     }
-  }, [authErrorUser]);
-
-  // LOGIN Estudante
-  const [emailEstudante, setEmailEstudante] = useState("");
-  const [passwordEstudante, setPasswordEstudante] = useState("");
-  const [errorEstudante, setErrorEstudante] = useState("");
-
-  const { loginEstudante, errorEstudante: authErrorEstudante, loadingEstudante } = useAuthenticationEstudante();
-
-  const handleSubmitEstudante = async (e) => {
-    e.preventDefault();
-
-    setErrorEstudante("");
-
-    const estudante = {
-      emailEstudante,
-      passwordEstudante,
-    };
-
-    const resEstudante = await loginEstudante(estudante);
-
-    console.log(resEstudante);
-  };
-
-  useEffect(() => {
-    console.log(authErrorEstudante);
-    if (authErrorEstudante) {
-      setErrorUser(authErrorEstudante);
-    }
-  }, [authErrorEstudante]);
+  }, [authError]);
 
   return (
     <div className={styles.login}>
       <h1>Entrar</h1>
-      <p>Faça seu login!</p>
-      <form onSubmit={({handleSubmitUser} || {handleSubmitEstudante})}>
+      <p>Faça o login para poder utilizar o sistema</p>
+      <form onSubmit={handleSubmit}>
         <label>
           <span>E-mail:</span>
-          <input type="email" name="emailUser" required placeholder="Digite seu e-mail" value={(emailUser || emailEstudante)} onChange={(e) => (setEmailUser || setEmailEstudante)(e.target.value)} />
+          <input type="email" name="email" required placeholder="E-mail do usuário" onChange={(e) => setEmail(e.target.value)} value={email} />
         </label>
         <label>
           <span>Senha:</span>
-          <input type="password" name="passwordUser" required placeholder="Digite sua senha" value={(passwordUser || passwordEstudante)} onChange={(e) => (setPasswordUser || setPasswordEstudante)(e.target.value)} />
+          <input type="password" name="password" required placeholder="Insira a senha" onChange={(e) => setPassword(e.target.value)} value={password} />
         </label>
-        {(!loadingUser || !loadingEstudante) && <button className="btn">Entrar</button>}
-        {(loadingUser || loadingEstudante) && <button className="btn" disabled>Aguarde...</button>}
-        {(errorUser || errorEstudante) && <p className="error">{(errorUser || errorEstudante)}</p>}
+        {!loading && <button className="btn">Entrar</button>}
+        {loading && (<button className="btn" disabled> Aguarde...</button>)}
+        {error && <p className="error">{error}</p>}
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

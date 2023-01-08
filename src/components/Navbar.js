@@ -4,8 +4,7 @@ import styles from "./Navbar.module.css";
 import { NavLink } from "react-router-dom";
 
 // HOOKS
-import { useAuthenticationUser } from '../hooks/useAuthenticationUser';
-import { useAuthenticationEstudante } from '../hooks/useAuthenticationEstudante';
+import { useAuthentication } from '../hooks/useAuthentication';
 
 // CONTEXT
 import { useAuthValue } from "../context/AuthContext";
@@ -13,9 +12,7 @@ import { useAuthValue } from "../context/AuthContext";
 const Navbar = () => {
 
     const {user} =  useAuthValue()
-    const {estudante} = useAuthValue()
-    const {logoutUser} = useAuthenticationUser()
-    const {logoutEstudante} = useAuthenticationEstudante()
+    const {logout} = useAuthentication()
 
   return <nav className={styles.navbar}>
     <NavLink className={styles.brand} to="/">
@@ -25,7 +22,7 @@ const Navbar = () => {
         <li>
             <NavLink to="/" className={({isActive}) => (isActive ? styles.active : "")}>Home</NavLink>
         </li>
-        {(!user || !estudante) && (
+        {!user && (
             <>
                 <li>
                     <NavLink to="/login" className={({isActive}) => (isActive ? styles.active : "")}>Login</NavLink>
@@ -38,7 +35,7 @@ const Navbar = () => {
         {user && (
             <>
                 <li>
-                    <NavLink to="/posts/create" className={({isActive}) => (isActive ? styles.active : "")}>Novo Post</NavLink>
+                    <NavLink to="/posts/create" className={({isActive}) => (isActive ? styles.active : "")}>Publicar</NavLink>
                 </li>
                 <li>
                     <NavLink to="/dashboard" className={({isActive}) => (isActive ? styles.active : "")}>Dashboard</NavLink>
@@ -48,9 +45,9 @@ const Navbar = () => {
         <li>
             <NavLink to="/sobre" className={({isActive}) => (isActive ? styles.active : "")}>Sobre</NavLink>
         </li>
-        {(user || estudante) && (
+        {user && (
             <li>
-                <button onClick={(logoutUser || logoutEstudante)}>Sair</button>
+                <NavLink onClick={logout}>Sair</NavLink>
             </li>
         )}
     </ul>
