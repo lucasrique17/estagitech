@@ -5,8 +5,8 @@ import {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {useAuthValue} from '../../context/AuthContext'
 import { useInsertDocuments } from '../../hooks/useInsertDocument'
-//import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
-//import { storage } from "../../firebase/config"
+import { ref } from 'firebase/storage';
+import { storage } from "../../firebase/config"
 
 
 const CreatePost = () => {
@@ -23,17 +23,53 @@ const CreatePost = () => {
 
   const {insertDocument, response} = useInsertDocuments('posts') 
 
+  function salvarImagemFirebase() {
+
+    const imagemRef = ref(storage, 'imagem.png')
+
+    const imagemPostsRef = ref(storage, 'posts/imagem.png')
+
+    if (imagemRef.title) {
+      return imagemRef.title === imagemPostsRef.title; 
+    }
+    if(imagemRef.fullPath){
+      return imagemRef.fullPath === imagemPostsRef.fullPath; 
+    }
+
+
+    /*const nomeImagem = 'imagem1'
+
+    const upload = ref(storage).child(imagemPostsRef).child(imagemRef).put(image);
+
+    upload.on(
+      "state_changed",
+      function() {
+
+        console.log("Deu certo");
+
+      },
+      function(formError) {
+
+        console.log("Deu errado");
+
+      }
+
+      try {
+      new URL(image);
+    } catch (error) {
+      setFormError("A imagem precisa ser uma URL.");
+    }
+    )*/
+
+  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
 
     setFormError('')
 
     // IMAGEM
-    try {
-      new URL(image);
-    } catch (error) {
-      setFormError("A imagem precisa ser uma URL.");
-    }
+    salvarImagemFirebase()
 
     // ARRAY DAS TAGS
     const tagsArray = tags.split(',').map((tag) => tag.trim().toLowerCase())
@@ -71,8 +107,8 @@ const CreatePost = () => {
           <input type="text" name="text" placeholder="Insira o título da vaga" onChange={(e) => setTitle(e.target.value)} value={title} />
         </label>
         <label>
-          <span>URL da imagem</span>
-          <input type="text" name="image" placeholder="Caso tenha, insira uma imagem da vaga" onChange={(e) => setImage(e.target.value)} value={image} />
+          <span>Imagem</span>
+          <input type="file" name="image" placeholder="Caso tenha, insira uma imagem da vaga" onChange={(e) => setImage(e.target.value)} value={image} />
         </label>
         <label>
           <span>Descrição</span>
