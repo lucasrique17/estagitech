@@ -61,6 +61,10 @@ const Register = () => {
     >
       <div className="max-w-xl lg:max-w-3xl">
 
+        <h1 className="text-center text-2xl font-bold text-gray-500 sm:text-3xl mb-5">
+        Cadastro disponível apenas para professores e empresas interessadas em disponibilizar vagas de estágio!!!
+        </h1>
+
         <h1
           className="mt-0 text-2xl font-bold text-black text-center sm:text-3xl md:text-4xl"
         >

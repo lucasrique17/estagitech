@@ -95,82 +95,40 @@ const CreatePost = () => {
   };
   return (
 
-<div className="mt-10 sm:mt-0">
-        <div className="md:grid md:grid-cols-2 md:gap-6">
-          <div className="mt-5 md:col-span-2 md:mt-0">
-            <form onSubmit={handleSubmit}>
-              <div className="overflow-hidden shadow sm:rounded-md">
-                <div className="bg-blue-200 px-4 py-5 sm:p-6">
-                  <h1 className="text-4xl text-bold font-medium leading-6 text-black text-center mb-3">Novo estágio</h1>
-                  <p className='text-1xl text-bold font-medium leading-6 text-black text-center mb-5'>Insira as melhores vagas de estágio!</p>
-                  <div className="grid grid-cols-2 gap-6">
-                    <div className="col-span-6 sm:col-span-6">
-                      <label htmlFor="first-name" className="block text-sm font-medium text-black">
-                      Título da vaga
-                      </label>
-                      <input
-                        type="text" name="text" placeholder="Insira o título da vaga" onChange={(e) => setTitle(e.target.value)} value={title}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
+      <div className="bg-blue-100 p-0 m-0 flex flex-col items-center justify-center my-0	mx-auto	">
+        
+        <h1 className="mt-5 font-bold	text-5xl mb-3">Novo estágio</h1>
+        <p className='mt-2 text-2xl mb-5'>Insira as melhores vagas de estágio!</p>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="first-name" className="flex flex-col mb-1.5 font-bold	text-left text-lg">Título da vaga</label>
+          <input type="text" name="text" placeholder="Insira o título da vaga" onChange={(e) => setTitle(e.target.value)} value={title} className="box-border	border-b-2 border-solid	border-blue-800	rounded w-full mb-4"/>
 
-                    <div className="col-span-6 sm:col-span-6">
-                      <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                        Imagem
-                      </label>
-                      <input
-                        id='uploader' type="file" name="image" placeholder="Caso tenha, insira uma imagem da vaga" onChange={(e)=> {UploadImagem(e)}}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
+          <label htmlFor="email-address" className="flex flex-col mb-1.5 font-bold	text-left text-lg">Imagem</label>
+          <input id='uploader' type="file" name="image" placeholder="Caso tenha, insira uma imagem da vaga" onChange={(e)=> {UploadImagem(e)}} className="box-border	border-b-2 border-solid	border-blue-800	rounded w-full mb-4"/>
 
-                    <div className="col-span-6 sm:col-span-6">
-                      <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                        Descrição da vaga
-                      </label>
-                      <textarea name="body" placeholder="Insira a descrição sobre a vaga" onChange={(e) => setBody(e.target.value)} value={body} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"></textarea>
-                    </div>
+          <label htmlFor="country" className="flex flex-col mb-1.5 font-bold	text-left text-lg">Descrição da vaga</label>
+          <textarea name="body" placeholder="Insira a descrição sobre a vaga" onChange={(e) => setBody(e.target.value)} value={body} className="box-border	border-b-2 border-solid	border-blue-800	rounded w-full mb-4"></textarea>
 
-                    <div className="col-span-6">
-                      <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
-                        Tags
-                      </label>
-                      <input
-                        type="text" name="tags" placeholder="Insira tags separadas por vírgula, como: front-end, redes, java" onChange={(e) => setTags(e.target.value)} value={tags}
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-blue-200 px-4 py-3 text-right sm:px-6">
-                  {!response.loading && <button className="inline-flex justify-center rounded-md border border-transparent bg-green-600 py-3 px-10 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">Postar</button>}
-                  {response.loading && (<button className="inline-flex justify-center rounded-md border border-transparent bg-green-600 py-3 px-10 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2" disabled>Aguarde...</button>)}
-                  {(response.error || formError) &&
-                    <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
-                      <div class="flex items-center gap-2 text-red-700">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 24 24"
-                          fill="currentColor"
-                          class="h-5 w-5"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
-                            clip-rule="evenodd"
-                          />
-                        </svg>
+          <label htmlFor="street-address" className="flex flex-col mb-1.5 font-bold	text-left text-lg">Tags</label>
+          <textarea type="text" name="tags" placeholder="Insira tags separadas por vírgula, como: front-end, redes, java" onChange={(e) => setTags(e.target.value)} value={tags} className="box-border	border-b-2 border-solid	border-blue-800	rounded w-full mb-10"></textarea>
+
+          {!response.loading && <button className="bg-green-600 hover:bg-green-800 text-white mt-0	mr-1.5 py-3 px-10 rounded-md text-base font-bold w-full mb-5">Postar</button>}
+          {response.loading && (<button className="inline-flex justify-center rounded-md border border-transparent bg-green-600 py-3 px-10 text-sm font-medium text-white shadow-sm hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2" disabled>Aguarde...</button>)}
+          {(response.error || formError) &&
+            <div role="alert" class="rounded border-l-4 border-red-500 bg-red-50 p-4">
+              <div class="flex items-center gap-2 text-red-700">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5">
+
+                <path fill-rule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clip-rule="evenodd"/>          
+                </svg>
                     
-                        <strong class="block font-medium">{response.error || formError}</strong>
-                      </div>
-                    </div>
-                  }   
-                </div>
+                <strong class="block font-medium">{response.error || formError}</strong>
               </div>
-            </form>
-          </div>
-        </div>
+            </div>
+          }   
+        </form>
       </div>
+ 
 
 
     /*<div className={styles.create_post}>

@@ -56,10 +56,6 @@ const Navbar = () => {
                 </>
             )}
 
-            <li>
-                <NavLink class="text-gray-500 transition hover:text-gray-500/75 dark:text-white dark:hover:text-white/75" to="/sobre"> Sobre </NavLink>
-            </li>
-
             {user && (
                 <>
                     <li>

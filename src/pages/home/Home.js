@@ -24,42 +24,28 @@ const Home = () => {
 
   return (
 
-<section class="bg-blue-200">
-  <div class="p-5 md:p-12 lg:px-16 lg:py-24 mt-5">
-    <div class="mx-auto max-w-lg text-center">
-      <h2 class="text-2xl font-bold text-black md:text-3xl">
-        Veja as vagas mais recentes!
-      </h2>
-    </div>
+  <div class="bg-blue-100 p-0 m-0 flex flex-col items-center justify-center">
+    <h1 class="font-bold text-4xl	mt-4">
+      Veja as vagas mais recentes!
+    </h1>
+    <form onSubmit={handleSubmit} class="max-w-full	w-2/3	flex justify-center mb-8 mt-4">
 
-    <div class="mx-auto mt-4 mb-5 max-w-xl">
-      <form onSubmit={handleSubmit} class="sm:flex sm:gap-4">
-        <div class="sm:flex-1">
+      <input type="text" placeholder='Pesquise seus interesses...' onChange={(e) => setQuery(e.target.value)}class="mr-2.5 w-2/4 rounded-2xl border-1 outline-none"/>
 
-          <input
-            type="text" placeholder='Pesquise seus interesses...' onChange={(e) => setQuery(e.target.value)}
-            class="w-full rounded-md border-black bg-white p-3 text-blck shadow-sm transition focus:border-blue-800 focus:outline-none focus:ring"
-          />
+      <button class="bg-black text-white text-center cursor-pointer rounded-2xl w-32	font-bold	border-none	p-2.5	text-base mr-2.5 w-2/4">Pesquisar</button>
+    </form>
+
+    <div>
+      {loading && <p>Carregando...</p>}
+      {posts && posts.map((post) => (<PostDetail key={post.id} post={post} /> ))}
+      {posts && posts.length === 0 && (
+        <div className="text-center">
+          <p className='mb-6 text-2xl font-bold'>Não foram encontradas vagas!!!</p>
         </div>
+      )}
+      </div>
 
-        <button
-          type="submit"
-          class="group mt-2 flex w-full items-center justify-center rounded-md bg-gray-800 hover:bg-black px-5 py-3 text-white transition focus:outline-none focus:ring focus:ring-yellow-400 sm:mt-0 sm:w-auto"
-        >
-          <span class="text-sm font-medium"> Pesquisar </span>
-
-        </button>
-      </form>
-    </div>
-    {loading && <p>Carregando...</p>}
-          {posts && posts.map((post) => (<PostDetail key={post.id} post={post} /> ))}
-          {posts && posts.length === 0 && (
-            <div className="text-center">
-              <p className='text-3xl text-bold font-medium leading-6 text-black text-center mt-1 flex justify-center'>Não foram encontradas vagas!!!</p>
-            </div>
-          )}
   </div>
-</section>
 
 
   /*<div className="flex items-center flex-col justify-center">

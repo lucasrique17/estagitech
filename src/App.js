@@ -16,7 +16,6 @@ import Footer from './components/Footer';
 
 // PAGINAS
 import Home from './pages/home/Home';
-import Sobre from './pages/sobre/Sobre';
 import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import Dashboard from './pages/dashboard/Dashboard';
@@ -55,7 +54,6 @@ function App() {
             <div className="container">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/sobre" element={<Sobre />} />
                 <Route path='/search' element={<Search />} />
                 <Route path='/posts/:id' element={<Post />} />
                 <Route path="/posts/create" element={user ? <CreatePost /> : <Navigate to="/login" />} />

@@ -35,6 +35,9 @@ const Login = () => {
 
 <div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 bg-blue-200 mt-5">
   <div className="mx-auto max-w-lg">
+    <h1 className="text-center text-2xl font-bold text-gray-500 sm:text-3xl mb-5">
+      Cadastro disponível apenas para professores e empresas interessadas em disponibilizar vagas de estágio!!!
+    </h1>
     <h1 className="text-center text-2xl font-bold text-black sm:text-3xl">
       Login
     </h1>
