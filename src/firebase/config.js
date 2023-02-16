@@ -6,6 +6,7 @@ import { getStorage } from "firebase/storage";
 const firebaseConfig = {
   apiKey: "AIzaSyANvGDbtgfmMLD2U4Nd6sD-9v8qe0ibaQM",
   authDomain: "estagitech-8df26.firebaseapp.com",
+  databaseURL: "https://estagitech-8df26-default-rtdb.firebaseio.com",
   projectId: "estagitech-8df26",
   storageBucket: "estagitech-8df26.appspot.com",
   messagingSenderId: "978548429311",
